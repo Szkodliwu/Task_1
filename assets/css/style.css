@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Ubuntu", sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body{
+    height: 100vh;
+    background: url(/assets/img/bg.jpg) no-repeat center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-container{
+    background: #2c3a47;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.quiz-header{
+    background: #f4f4f4;
+    width: 100%;
+    padding: 60px 40px;
+}
+
+#answer-buttons{
+    padding: 30px 15px;
+}
+
+.btn{
+    background: #2c3a47;
+    display: inline-block;
+    color: #e66767;
+    width: 100%;
+    border: 2px solid #e66767;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    transition: .3s linear;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: #e66767;
+    color: #f2f2f2;
+}
+
+#quiz-submit{
+    background: #2c3a47;
+    color: #e66767;
+    width: 150px;
+    border: 2px solid #e66767;
+    padding: 10px 0;
+    margin: 10px auto 15px;
+    border-radius: 4px;
+    transition: .3s linear;
+    cursor: pointer;
+    display: none;
+}
+
+#quiz-submit:hover{
+    background: #c5d1db;
+    color: #e66767;
+}
