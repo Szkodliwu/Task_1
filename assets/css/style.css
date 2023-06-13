@@ -49,9 +49,13 @@ body{
     cursor: pointer;
 }
 
-.btn:hover{
+.btn:hover:not([disabled]){
     background: #e66767;
     color: #f2f2f2;
+}
+
+.btn:disabled{
+    cursor: no-drop;
 }
 
 #quiz-submit{
@@ -64,10 +68,18 @@ body{
     border-radius: 4px;
     transition: .3s linear;
     cursor: pointer;
-    display: none;
+    display: block;
 }
 
 #quiz-submit:hover{
     background: #c5d1db;
     color: #e66767;
+}
+
+.correct{
+    background: #9aeabc;
+}
+
+.incorrect{
+    background: #ff9393;
 }
