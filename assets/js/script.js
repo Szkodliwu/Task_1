@@ -115,11 +115,12 @@ function selectAnswer(e) {
         selectedBtn.classList.add("incorrect");
     }
     Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === "true") {
+        if (button.dataset.correct === "true") {
             button.classList.add("correct");
         }
         button.disabled = true;
     });
+    
     quizSubmit.style.display = "block";
 }
 
@@ -131,7 +132,7 @@ function showScore() {
     quizSubmit.style.display = "block"; 
 }
 
-function handleNextButton() {
+function handleQuizSubmit() {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
         showQuestion();
@@ -142,7 +143,7 @@ function handleNextButton() {
 
 quizSubmit.addEventListener("click", () => {
     if (currentQuestionIndex < questions.length) {
-        handleNextButton();
+        handleQuizSubmit();
     } else {
         startQuiz();
     }

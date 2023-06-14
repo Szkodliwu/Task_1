@@ -83,3 +83,25 @@ body{
 .incorrect{
     background: #ff9393;
 }
+
+@media (max-width: 768px) {
+    .quiz-container {
+        margin-top: 50px;
+    }
+
+    .quiz-header {
+        padding: 40px 20px;
+    }
+
+    #answer-buttons {
+        padding: 20px 10px;
+    }
+
+    .btn {
+        margin: 5px 0;
+    }
+
+    #quiz-submit {
+        margin-bottom: 10px;
+    }
+}
