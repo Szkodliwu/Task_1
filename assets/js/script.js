@@ -128,7 +128,7 @@ function showScore() {
     questionElement.innerHTML = `You scored ${score} out of ${questions.
     length}!`;
     quizSubmit.innerHTML = "Play Again";
-    quizSubmit.style.display = "block";
+    quizSubmit.style.display = "block"; 
 }
 
 function handleNextButton() {
@@ -149,4 +149,3 @@ quizSubmit.addEventListener("click", () => {
 });
 
 startQuiz();
-
