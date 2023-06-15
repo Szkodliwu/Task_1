@@ -36,7 +36,7 @@ const questions = [
         ]
     },
     {
-        question: "Which of these characters are friends with Harry Potter?",
+        question: "Which of these characters are friends with Harry Potter?(Two answers)",
         answers: [
             {text:"Ron Weasley", correct:true},
             {text:"Draco Malfoy", correct:false},
@@ -97,7 +97,6 @@ function showQuestion() {
     });
 }
 
-
 function resetState() {
     quizSubmit.style.display = "none";
     while (answerButtons.firstChild) {
@@ -108,26 +107,62 @@ function resetState() {
 function selectAnswer(e) {
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
+
+    const currentQuestion = questions[currentQuestionIndex];
+    const correctAnswers = currentQuestion.answers.filter(answer => answer.correct);
+    const correctAnswersCount = correctAnswers.length;
+
+    if (correctAnswersCount === 2) {
     if (isCorrect) {
         selectedBtn.classList.add("correct");
         score++;
     } else {
         selectedBtn.classList.add("incorrect");
     }
-    Array.from(answerButtons.children).forEach(button => {
-        if (button.dataset.correct === "true") {
-            button.classList.add("correct");
+
+    const selectedAnswers = answerButtons.getElementsByClassName("correct").length + answerButtons.getElementsByClassName("incorrect").length;
+    if (selectedAnswers === 2) {
+        Array.from(answerButtons.children).forEach((button) => {
+        button.disabled = true;
+        });
+        showCorrectAnswers(correctAnswers);
+        quizSubmit.style.display = "block";
+    }
+    } else {
+    Array.from(answerButtons.children).forEach((button) => {
+        const isButtonCorrect = button.dataset.correct === "true";
+        if (isButtonCorrect) {
+        button.classList.add("correct");
+        if (isCorrect) {
+            button.classList.add("show-correct");
+        }
+        } else if (button === selectedBtn) {
+        button.classList.add("incorrect");
         }
         button.disabled = true;
     });
-    
     quizSubmit.style.display = "block";
+
+    if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        score++;
+    } else {
+        showCorrectAnswers(correctAnswers);
+    }
+    }
+}
+
+function showCorrectAnswers(correctAnswers) {
+    correctAnswers.forEach((answer) => {
+    const correctAnswerButton = Array.from(answerButtons.children).find((btn) => btn.innerHTML === answer.text);
+    correctAnswerButton.classList.add("show-correct");
+    });
 }
 
 function showScore() {
     resetState();
     questionElement.innerHTML = `You scored ${score} out of ${questions.
-    length}!`;
+    length} questions!`;
     quizSubmit.innerHTML = "Play Again";
     quizSubmit.style.display = "block"; 
 }

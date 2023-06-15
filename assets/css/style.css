@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Ubuntu", sans-serif;
@@ -6,7 +6,7 @@
     text-decoration: none;
 }
 
-body{
+body {
     height: 100vh;
     background: url(/assets/img/bg.jpg) no-repeat center;
     background-size: cover;
@@ -15,7 +15,7 @@ body{
     justify-content: center;
 }
 
-.quiz-container{
+.quiz-container {
     background: #2c3a47;
     width: 90%;
     max-width: 600px;
@@ -26,17 +26,17 @@ body{
     box-shadow: 0px 0px 20px #000000b3;
 }
 
-.quiz-header{
+.quiz-header {
     background: #f4f4f4;
     width: 100%;
     padding: 60px 40px;
 }
 
-#answer-buttons{
+#answer-buttons {
     padding: 30px 15px;
 }
 
-.btn{
+.btn {
     background: #2c3a47;
     display: inline-block;
     color: #e66767;
@@ -45,20 +45,20 @@ body{
     border-radius: 6px;
     padding: 10px;
     margin: 10px 0;
-    transition: .3s linear;
+    transition: 0.3s linear;
     cursor: pointer;
 }
 
-.btn:hover:not([disabled]){
+.btn:hover:not([disabled]) {
     background: #e66767;
     color: #f2f2f2;
 }
 
-.btn:disabled{
+.btn:disabled {
     cursor: no-drop;
 }
 
-#quiz-submit{
+#quiz-submit {
     background: #2c3a47;
     color: #e66767;
     width: 150px;
@@ -66,21 +66,21 @@ body{
     padding: 10px 0;
     margin: 10px auto 15px;
     border-radius: 4px;
-    transition: .3s linear;
+    transition: 0.3s linear;
     cursor: pointer;
     display: block;
 }
 
-#quiz-submit:hover{
+#quiz-submit:hover {
     background: #c5d1db;
     color: #e66767;
 }
 
-.correct{
+.correct {
     background: #9aeabc;
 }
 
-.incorrect{
+.incorrect {
     background: #ff9393;
 }
 
