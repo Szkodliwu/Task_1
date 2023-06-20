@@ -1,23 +1,23 @@
-.toggle-btn{
-    position: relative;
-    right: 220px;
-    width: 140px;
-    height: 60px;
-    margin: 20px;
-    background: url(/assets/img/light.jpg) no-repeat center;
-    background-size: cover;
-    border-radius: 30px;
-    border: none;
-    transition: 0.4s linear;
-    cursor: pointer;
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 140px;
+  height: 60px;
+  background: url(/assets/img/light.jpg) no-repeat center;
+  background-size: cover;
+  border-radius: 30px;
+  border: none;
+  transition: 0.4s linear;
+  cursor: pointer;
 }
 
-.dark-mode .toggle-btn{
+.dark-mode .toggle-btn {
     background: url(/assets/img/dark.jpg) no-repeat center;
     background-size: cover;
 }
 
-.circle{
+.circle {
     position: absolute;
     width: 44px;
     height: 44px;
@@ -28,7 +28,7 @@
     transition: 0.4s linear;
 }
 
-.dark-mode .circle{
+.dark-mode .circle {
   position: absolute;
   top: 8px;
   left: 4px;
@@ -41,7 +41,7 @@
 }
 
 .circle::before,
-.circle::after{
+.circle::after {
   content: "";
   width: 44px;
   height: 44px;
@@ -54,11 +54,11 @@
 }
 
 .dark-mode .circle::before,
-.dark-mode .circle::after{
+.dark-mode .circle::after {
   border: 1px solid #333;
 }
 
-.circle::after{
+.circle::after { 
   animation-delay: 0.5s;
 }
 
