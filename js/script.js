@@ -69,10 +69,13 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const quizSubmit = document.getElementById("quiz-submit");
+const timerElement = document.getElementById("timer");
 
 // Инициализация переменных состояния
 let currentQuestionIndex = 0;
 let score = 0;
+let timeLeft = 30;
+let timerInterval;
 
 document.querySelector(".toggle-btn").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
@@ -85,12 +88,33 @@ document.querySelector(".toggle-btn").addEventListener("click", () => {
   }
 });
 
+// Функция обновления таймера
+function updateTimer() {
+  timerElement.textContent = `Time left: ${timeLeft} seconds`;
+
+  if (timeLeft <= 0) {
+    // Если время истекло, переходим к следующему вопросу
+    clearInterval(timerInterval);
+    handleQuizSubmit();
+  } else {
+    timeLeft--;
+  }
+}
+
 // Функция начала викторины
 function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
   quizSubmit.innerHTML = "Submit";
   showQuestion();
+  startTimer();
+}
+
+// Функция запуска таймера
+function startTimer() {
+  clearInterval(timerInterval); // Очистка предыдущего интервала, если он существует
+  timeLeft = 30; // Задайте здесь нужное время на каждый вопрос в секундах
+  timerInterval = setInterval(updateTimer, 1000);
 }
 
 // Функция отображения вопроса и вариантов ответов
@@ -146,6 +170,7 @@ function selectAnswer(e) {
         button.disabled = true;
       });
       showCorrectAnswers(correctAnswers);
+      clearInterval(timerInterval);
       quizSubmit.style.display = "block";
     }
   } else {
@@ -161,6 +186,7 @@ function selectAnswer(e) {
       }
       button.disabled = true;
     });
+    clearInterval(timerInterval);
     quizSubmit.style.display = "block";
 
     if (isCorrect) {
@@ -183,31 +209,31 @@ function showCorrectAnswers(correctAnswers) {
 }
 
 // Функция отображения результатов
-function showScore() {
+function showResults() {
+  questionElement.innerHTML = `You scored ${score} out of ${questions.length} questions correctly.`;
   resetState();
-  questionElement.innerHTML = `You scored ${score} out of ${questions.length} questions!`;
   quizSubmit.innerHTML = "Play Again";
   quizSubmit.style.display = "block";
+  clearInterval(timerInterval);
 }
 
-// Функция обработки нажатия кнопки "Submit" или "Play Again"
+// Функция обработки отправки ответов
 function handleQuizSubmit() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    showQuestion();
-  } else {
-    showScore();
-  }
-}
-
-// Добавление обработчика события для кнопки "Submit" или "Play Again"
-quizSubmit.addEventListener("click", () => {
-  if (currentQuestionIndex < questions.length) {
-    handleQuizSubmit();
+  if (quizSubmit.innerHTML === "Submit") {
+    if (currentQuestionIndex === questions.length - 1) {
+      showResults();
+    } else {
+      currentQuestionIndex++;
+      showQuestion();
+      startTimer();
+    }
   } else {
     startQuiz();
   }
-});
+}
+
+// Обработчик события отправки ответов
+quizSubmit.addEventListener("click", handleQuizSubmit);
 
 // Запуск викторины
 startQuiz();
