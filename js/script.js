@@ -214,8 +214,8 @@ function showCorrectAnswers(correctAnswers) {
 
 // Функция отображения результатов
 function showResults() {
-  questionElement.innerHTML = `You scored ${score} out of ${questions.length} questions correctly.`;
   resetState();
+  questionElement.innerHTML = `You scored ${score} out of ${questions.length} questions correctly.`;
   quizSubmit.innerHTML = "Play Again";
   quizSubmit.style.display = "block";
   timerElement.style.display = "none";
