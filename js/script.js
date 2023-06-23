@@ -77,6 +77,27 @@ let score = 0;
 let timeLeft = 30;
 let timerInterval;
 
+// Функция сохранения состояния в localStorage
+function saveStateToLocalStorage() {
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+  localStorage.setItem("currentQuestionIndex", currentQuestionIndex.toString());
+}
+
+// Функция восстановления состояния из localStorage
+function restoreStateFromLocalStorage() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+
+  const savedCurrentQuestionIndex = localStorage.getItem("currentQuestionIndex");
+  if (savedCurrentQuestionIndex) {
+    currentQuestionIndex = parseInt(savedCurrentQuestionIndex);
+  }
+}
+
 // Реализация dark-mode
 document.querySelector(".toggle-btn").addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
@@ -87,6 +108,8 @@ document.querySelector(".toggle-btn").addEventListener("click", () => {
   } else {
     icon.src = "./assets/icon/sun.png";
   }
+
+  saveStateToLocalStorage(); // Сохранение темы в localStorage при изменении
 });
 
 // Функция обновления таймера
@@ -109,6 +132,7 @@ function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
   quizSubmit.innerHTML = "Submit";
+  restoreStateFromLocalStorage();
   showQuestion();
   startTimer();
 }
@@ -200,6 +224,8 @@ function selectAnswer(e) {
       showCorrectAnswers(correctAnswers);
     }
   }
+
+  saveStateToLocalStorage(); // Сохранение текущего вопроса в localStorage
 }
 
 // Функция отображения правильных ответов
@@ -235,6 +261,8 @@ function handleQuizSubmit() {
   } else {
     startQuiz();
   }
+
+  saveStateToLocalStorage(); // Сохранение текущего вопроса в localStorage перед переходом
 }
 
 // Обработчик события отправки ответов
