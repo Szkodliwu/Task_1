@@ -77,12 +77,26 @@ let score = 0;
 let timeLeft = 30;
 let timerInterval;
 
+// Реализация dark-mode
+document.querySelector(".toggle-btn").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  const icon = document.querySelector(".icon");
+
+  if (document.body.classList.contains("dark-mode")) {
+    icon.src = "./assets/icon/moon.png";
+  } else {
+    icon.src = "./assets/icon/sun.png";
+  }
+});
+
 // Функция обновления таймера
-function updateTimer() {
-  timerElement.textContent = `Time left: ${timeLeft} seconds`;
+function setDate() {
+  const seconds = timeLeft;
+  const secondsPercentage = (seconds / 30) * 100;
+  document.getElementById("timer-progress").style.width = secondsPercentage + "%";
+  document.getElementById("timer-progress").innerHTML = seconds;
 
   if (timeLeft <= 0) {
-    // Если время истекло, переходим к следующему вопросу
     clearInterval(timerInterval);
     handleQuizSubmit();
   } else {
@@ -102,9 +116,9 @@ function startQuiz() {
 // Функция запуска таймера
 function startTimer() {
   clearInterval(timerInterval); // Очистка предыдущего интервала, если он существует
-  timeLeft = 30; // Задайте здесь нужное время на каждый вопрос в секундах
+  timeLeft = 30;
   timerElement.style.display = "block";
-  timerInterval = setInterval(updateTimer, 1000);
+  timerInterval = setInterval(setDate, 1000);
 }
 
 // Функция отображения вопроса и вариантов ответов
