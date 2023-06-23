@@ -72,7 +72,7 @@ const quizSubmit = document.getElementById("quiz-submit");
 const timerElement = document.getElementById("timer");
 
 // Инициализация переменных состояния
-let currentQuestionIndex = 0;
+let currentQuestionIndex = -1; // Изменено на -1, чтобы начинать с первого вопроса
 let score = 0;
 let timeLeft = 30;
 let timerInterval;
@@ -129,7 +129,7 @@ function setDate() {
 
 // Функция начала викторины
 function startQuiz() {
-  currentQuestionIndex = 0;
+  currentQuestionIndex = 0; // Изменено на 0, чтобы начинать с первого вопроса
   score = 0;
   quizSubmit.innerHTML = "Submit";
   restoreStateFromLocalStorage();
