@@ -77,17 +77,6 @@ let score = 0;
 let timeLeft = 30;
 let timerInterval;
 
-document.querySelector(".toggle-btn").addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  const icon = document.querySelector(".icon");
-
-  if (document.body.classList.contains("dark-mode")) {
-    icon.src = "./assets/icon/moon.png";
-  } else {
-    icon.src = "./assets/icon/sun.png";
-  }
-});
-
 // Функция обновления таймера
 function updateTimer() {
   timerElement.textContent = `Time left: ${timeLeft} seconds`;
@@ -114,6 +103,7 @@ function startQuiz() {
 function startTimer() {
   clearInterval(timerInterval); // Очистка предыдущего интервала, если он существует
   timeLeft = 30; // Задайте здесь нужное время на каждый вопрос в секундах
+  timerElement.style.display = "block";
   timerInterval = setInterval(updateTimer, 1000);
 }
 
@@ -214,6 +204,7 @@ function showResults() {
   resetState();
   quizSubmit.innerHTML = "Play Again";
   quizSubmit.style.display = "block";
+  timerElement.style.display = "none";
   clearInterval(timerInterval);
 }
 
