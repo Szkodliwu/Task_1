@@ -1,4 +1,3 @@
-// Определение массива вопросов и ответов
 const questions = [
   {
     question: "How many planets are in the solar system?",
@@ -72,31 +71,13 @@ const quizSubmit = document.getElementById("quiz-submit");
 const timerElement = document.getElementById("timer");
 
 // Инициализация переменных состояния
-let currentQuestionIndex = -1; // Изменено на -1, чтобы начинать с первого вопроса
+let currentQuestionIndex = 0;
 let score = 0;
 let timeLeft = 30;
 let timerInterval;
 
-// Функция сохранения состояния в localStorage
-function saveStateToLocalStorage() {
-  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
-  localStorage.setItem("currentQuestionIndex", currentQuestionIndex.toString());
-}
-
-// Функция восстановления состояния из localStorage
-function restoreStateFromLocalStorage() {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-  } else {
-    document.body.classList.remove("dark-mode");
-  }
-
-  const savedCurrentQuestionIndex = localStorage.getItem("currentQuestionIndex");
-  if (savedCurrentQuestionIndex) {
-    currentQuestionIndex = parseInt(savedCurrentQuestionIndex);
-  }
-}
+// Проверка состояния dark mode в localStorage
+let isDarkMode = localStorage.getItem("darkMode") === "true";
 
 // Реализация dark-mode
 document.querySelector(".toggle-btn").addEventListener("click", () => {
@@ -105,12 +86,23 @@ document.querySelector(".toggle-btn").addEventListener("click", () => {
 
   if (document.body.classList.contains("dark-mode")) {
     icon.src = "./assets/icon/moon.png";
+    isDarkMode = true;
   } else {
     icon.src = "./assets/icon/sun.png";
+    isDarkMode = false;
   }
 
-  saveStateToLocalStorage(); // Сохранение темы в localStorage при изменении
+  localStorage.setItem("darkMode", isDarkMode);
 });
+
+// Проверка состояния dark mode при загрузке страницы и применение его
+if (isDarkMode) {
+  document.body.classList.add("dark-mode");
+  document.querySelector(".icon").src = "./assets/icon/moon.png";
+} else {
+  document.body.classList.remove("dark-mode");
+  document.querySelector(".icon").src = "./assets/icon/sun.png";
+}
 
 // Функция обновления таймера
 function setDate() {
@@ -129,10 +121,11 @@ function setDate() {
 
 // Функция начала викторины
 function startQuiz() {
-  currentQuestionIndex = 0; // Изменено на 0, чтобы начинать с первого вопроса
+  const savedIndex = localStorage.getItem("currentQuestionIndex");
+  currentQuestionIndex = savedIndex !== null ? parseInt(savedIndex) : 0;
+
   score = 0;
   quizSubmit.innerHTML = "Submit";
-  restoreStateFromLocalStorage();
   showQuestion();
   startTimer();
 }
@@ -148,21 +141,26 @@ function startTimer() {
 // Функция отображения вопроса и вариантов ответов
 function showQuestion() {
   resetState();
-  const currentQuestion = questions[currentQuestionIndex];
-  const questionNo = currentQuestionIndex + 1;
-  questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
+  if (questionElement && currentQuestionIndex < questions.length) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = `${questionNo}. ${currentQuestion.question}`;
 
-  currentQuestion.answers.forEach((answer) => {
-    const button = document.createElement("button");
-    button.innerHTML = answer.text;
-    button.classList.add("btn");
-    answerButtons.appendChild(button);
-    if (answer.correct) {
-      button.dataset.correct = answer.correct;
-    }
-    button.addEventListener("click", selectAnswer);
-  });
+    currentQuestion.answers.forEach((answer) => {
+      const button = document.createElement("button");
+      button.innerHTML = answer.text;
+      button.classList.add("btn");
+      answerButtons.appendChild(button);
+      if (answer.correct) {
+        button.dataset.correct = answer.correct;
+      }
+      button.addEventListener("click", selectAnswer);
+    });
+  } else {
+    showResults();
+  }
 }
+
 
 // Функция сброса состояния
 function resetState() {
@@ -187,6 +185,7 @@ function selectAnswer(e) {
       score++;
     } else {
       selectedBtn.classList.add("incorrect");
+      localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
     }
 
     const selectedAnswers =
@@ -224,8 +223,6 @@ function selectAnswer(e) {
       showCorrectAnswers(correctAnswers);
     }
   }
-
-  saveStateToLocalStorage(); // Сохранение текущего вопроса в localStorage
 }
 
 // Функция отображения правильных ответов
@@ -246,6 +243,8 @@ function showResults() {
   quizSubmit.style.display = "block";
   timerElement.style.display = "none";
   clearInterval(timerInterval);
+
+  localStorage.removeItem("currentQuestionIndex");
 }
 
 // Функция обработки отправки ответов
@@ -253,16 +252,18 @@ function handleQuizSubmit() {
   if (quizSubmit.innerHTML === "Submit") {
     if (currentQuestionIndex === questions.length - 1) {
       showResults();
+
+      localStorage.removeItem("currentQuestionIndex");
     } else {
       currentQuestionIndex++;
       showQuestion();
       startTimer();
+
+      localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
     }
   } else {
     startQuiz();
   }
-
-  saveStateToLocalStorage(); // Сохранение текущего вопроса в localStorage перед переходом
 }
 
 // Обработчик события отправки ответов
