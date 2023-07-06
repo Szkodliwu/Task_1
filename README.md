@@ -73,7 +73,7 @@ Open the `index.html` file in your favorite web browser.
     - Yom Kippur
     - Kwanzaa
     - Rosh Hashanah (correct answer)
-## Authors
+## Author
 
 - [@Szkodliwu](https://github.com/Szkodliwu)
 
