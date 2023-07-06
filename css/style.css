@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Ubuntu", sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    height: 100vh;
+    background: url(/assets/img/bg.jpg) no-repeat center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-container {
+    background: #2c3a47;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px #000000b3;
+}
+
+.quiz-header {
+    background: #f4f4f4;
+    width: 100%;
+    padding: 25px 20px;
+}
+
+#answer-buttons {
+    padding: 30px 15px;
+}
+
+.btn {
+    background: #2c3a47;
+    display: inline-block;
+    color: #e66767;
+    width: 100%;
+    border: 2px solid #e66767;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+
+.btn:hover:not([disabled]) {
+    background: #e66767;
+    color: #f2f2f2;
+}
+
+.btn:disabled {
+    cursor: no-drop;
+}
+
+#quiz-submit {
+    background: #2c3a47;
+    color: #e66767;
+    width: 150px;
+    border: 2px solid #e66767;
+    padding: 10px 0;
+    margin: 10px auto 15px;
+    border-radius: 4px;
+    transition: 0.3s linear;
+    cursor: pointer;
+    display: block;
+}
+
+#quiz-submit:hover {
+    background: #c5d1db;
+    color: #e66767;
+}
+
+#timer {
+  background: #ddd;
+  height: 15px;
+  margin: 15px;
+  border-radius: 10px;
+  position: relative;
+}
+
+#timer-progress {
+  width: 0%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #e66767;
+  transition: width 1s linear;
+}
+
+.correct {
+    background: #9aeabc;
+}
+
+.incorrect {
+    background: #ff9393;
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        margin-top: 50px;
+    }
+
+    .quiz-header {
+        padding: 40px 20px;
+    }
+
+    #answer-buttons {
+        padding: 20px 10px;
+    }
+
+    .btn {
+        margin: 5px 0;
+    }
+
+    #quiz-submit {
+        margin-bottom: 10px;
+    }
+}
