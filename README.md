@@ -32,43 +32,43 @@ Open the `index.html` file in your favorite web browser.
 - The browser's local storage is used to save dark theme settings.
 ## Questions
 
-  1. **How many planets are in the solar system?**
+1. **How many planets are in the solar system?**
     - 8 (correct answer)
     - 9
     - 10
     - 11
 
-  2. **What is the freezing point of water?**
+2. **What is the freezing point of water?**
     - 0 (correct answer)
     - -5
     - -6
     - 1
 
-  3. **What is the longest river in the world?**
+3. **What is the longest river in the world?**
     - Nile (correct answer)
     - Amazon
     - Yangtze
     - Mississippi
 
-  4. **How many chromosomes are in the human genome?**
+4. **How many chromosomes are in the human genome?**
     - 42
     - 44
     - 46 (correct answer)
     - 48
 
-  5. **Which of these characters are friends with Harry Potter? (Two answers)**
+5. **Which of these characters are friends with Harry Potter? (Two answers)**
     - Ron Weasley (correct answer)
     - Draco Malfoy
     - Hermione Granger (correct answer)
     - Neville Longbottom
 
-  6. **What is the capital of Canada?**
+6. **What is the capital of Canada?**
     - Toronto
     - Ottawa (correct answer)
     - Vancouver
     - Montreal
 
-  7. **What is the Jewish New Year called?**
+7. **What is the Jewish New Year called?**
     - Hanukkah
     - Yom Kippur
     - Kwanzaa
