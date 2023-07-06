@@ -161,7 +161,6 @@ function showQuestion() {
   }
 }
 
-
 // Функция сброса состояния
 function resetState() {
   quizSubmit.style.display = "none";
